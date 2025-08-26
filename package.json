@@ -3,27 +3,23 @@
   "version": "1.0.0",
   "description": "Core utilities for Next.js projects including DB connector and logger",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.mjs"
-      },
       "require": {
         "types": "./dist/types/index.d.ts",
         "default": "./dist/cjs/index.js"
-      }
+      },
+      "default": "./dist/cjs/index.js"
     }
   },
   "scripts": {
-    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
-    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir dist/cjs",
-    "build:esm": "tsc --project tsconfig.json --module esnext --outDir dist/esm && renamer --find .js --replace .mjs 'dist/esm/**/*.js'",
-    "build:types": "tsc --project tsconfig.json --emitDeclarationOnly --outDir dist/types",
-    "clean": "npm run rimraf dist",
-    "prepublishOnly": "npm run clean && npm run build"
+    "build": "npm run clean && npm run build:cjs && npm run build:types",
+    "build:cjs": "npx tsc --project tsconfig.json --module commonjs --outDir dist/cjs",
+    "build:types": "npx tsc --project tsconfig.json --emitDeclarationOnly --outDir dist/types",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test:build": "npx tsc --project tsconfig.json --noEmit"
   },
   "keywords": [
     "nextjs",
@@ -43,15 +39,14 @@
     "url": "https://github.com/flowxcode/njs-core.git"
   },
   "devDependencies": {
-    "@types/pg": "^8.15.5",
+    "@types/pg": "^8.10.9",
     "@types/winston": "^2.4.4",
-    "renamer": "^4.0.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "next": "^15.5.2",
+    "next": "^15.0.0",
     "pg": "^8.12.0",
-    "winston": "^3.17.0"
+    "winston": "^3.13.1"
   }
 }
