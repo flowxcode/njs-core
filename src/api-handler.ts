@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { query } from './db';
+import query from './db';
 import logger from './logger';
-import { STATUS } from './constants';
+import STATUS from './constants';
 
-export async function apiHandler<T>(
+export default async function apiHandler<T>(
   fn: () => Promise<T>,
   options: { useTransaction?: boolean } = {}
 ): Promise<NextResponse> {

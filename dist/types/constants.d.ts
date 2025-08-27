@@ -1,4 +1,4 @@
-export declare const STATUS: {
+declare const STATUS: {
     OK: number;
     ERROR: number;
     CONFLICT: number;
@@ -6,4 +6,5 @@ export declare const STATUS: {
     BAD_REQUEST: number;
     UNAUTHORIZED: number;
 };
+export default STATUS;
 //# sourceMappingURL=constants.d.ts.map

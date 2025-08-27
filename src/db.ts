@@ -36,7 +36,7 @@ async function getClient(): Promise<Client> {
   return client;
 }
 
-export async function query<T = any>(
+export default async function query<T = any>(
   queryText: string,
   params: any[] = [],
   retries = 3,

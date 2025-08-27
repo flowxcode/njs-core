@@ -1,4 +1,4 @@
-export const STATUS = {
+const STATUS = {
   OK: 200,
   ERROR: 500,
   CONFLICT: 409,
@@ -6,3 +6,5 @@ export const STATUS = {
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
 };
+
+export default STATUS;
