@@ -12,20 +12,25 @@ if (!fs_1.default.existsSync(logDir)) {
     fs_1.default.mkdirSync(logDir, { recursive: true });
 }
 const logger = (0, winston_1.createLogger)({
-    level: 'info',
-    format: winston_1.format.combine(winston_1.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), winston_1.format.json(), process.env.NODE_ENV !== 'production' ? winston_1.format.prettyPrint() : winston_1.format.json()),
+    level: 'info', // Minimum log level: info and above (error, warn)
+    format: winston_1.format.combine(winston_1.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), // Add timestamp to logs
+    winston_1.format.json(), // Output logs in JSON format
+    process.env.NODE_ENV !== 'production' ? winston_1.format.prettyPrint() : winston_1.format.json() // Pretty print in dev, JSON in prod
+    ),
     transports: [
-        new winston_1.transports.File({ filename: logFile }),
+        new winston_1.transports.File({ filename: logFile }), // Write logs to file specified by logFile
         ...(process.env.NODE_ENV !== 'production'
             ? [
                 new winston_1.transports.Console({
-                    format: winston_1.format.combine(winston_1.format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`)),
+                    format: winston_1.format.combine(winston_1.format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`) // Custom log format
+                    ),
                 }),
             ]
             : [
                 new winston_1.transports.Console({
-                    format: winston_1.format.combine(winston_1.format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`)),
-                    level: 'error',
+                    format: winston_1.format.combine(winston_1.format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`) // Custom log format
+                    ),
+                    level: 'error', // Only log errors in prod
                 }),
             ]),
     ],

@@ -10,28 +10,28 @@ if (!fs.existsSync(logDir)) {
 }
 
 const logger: Logger = createLogger({
-    level: 'info',
+    level: 'info', // Minimum log level: info and above (error, warn)
     format: format.combine(
-        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        format.json(),
-        process.env.NODE_ENV !== 'production' ? format.prettyPrint() : format.json()
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), // Add timestamp to logs
+        format.json(), // Output logs in JSON format
+        process.env.NODE_ENV !== 'production' ? format.prettyPrint() : format.json() // Pretty print in dev, JSON in prod
     ),
     transports: [
-        new transports.File({ filename: logFile }),
+        new transports.File({ filename: logFile }), // Write logs to file specified by logFile
         ...(process.env.NODE_ENV !== 'production'
             ? [
-                  new transports.Console({
+                  new transports.Console({ // Console logging for dev
                       format: format.combine(
-                          format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`)
+                          format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`) // Custom log format
                       ),
                   }),
               ]
             : [
-                  new transports.Console({
+                  new transports.Console({ // Console logging for prod, errors only
                       format: format.combine(
-                          format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`)
+                          format.printf(({ timestamp, level, message }) => `\n${timestamp} [${level}]: ${message}`) // Custom log format
                       ),
-                      level: 'error',
+                      level: 'error', // Only log errors in prod
                   }),
               ]),
     ],

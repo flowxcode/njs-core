@@ -1,6 +1,6 @@
 {
-  "name": "@flowxcode/njs-core",
-  "version": "1.0.2",
+  "name": "@flowiso/njs-core",
+  "version": "1.0.4",
   "description": "Core utilities for Next.js projects including DB connector and logger",
   "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",
@@ -28,7 +28,7 @@
     "db",
     "logger"
   ],
-  "author": "flowxcode",
+  "author": "flowiso",
   "license": "MIT",
   "files": [
     "dist",
@@ -36,7 +36,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/flowxcode/njs-core.git"
+    "url": "git+https://github.com/flowxcode/njs-core.git"
   },
   "devDependencies": {
     "@types/pg": "^8.10.9",
